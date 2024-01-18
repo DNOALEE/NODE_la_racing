@@ -7,7 +7,7 @@ from matplotlib import animation
 from time import time
 
 import plot_functions.mpctools as mpc
-from data_functions.get_data import track_data, cart_data
+from data.data_functions.get_data import track_data, cart_data
 
 def states_and_controls(sim):
     if sim:
