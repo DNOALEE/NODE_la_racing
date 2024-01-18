@@ -1,13 +1,14 @@
 import numpy as np
 import yaml
+import os
 import torch
 import torch.nn as nn
 from torchdiffeq import odeint_adjoint as odeint
 from bisect import bisect
 from time import time
 
-from data_functions.get_data import divide_in_batches, cart_data
-from data_functions.utils import array_to_tensor,first_index
+from data.data_functions.get_data import divide_in_batches, cart_data
+from data.data_functions.utils import array_to_tensor,first_index
 from plot_functions.trajectory_plot import plot_batch
 
 
@@ -34,7 +35,9 @@ def system(whole_data,hidden_size1,hidden_size2,sim,method):
             x = self.tanh(x)
             return(x)
         def track_and_car_data(self):
-            la_track = r'C:\Users\Oliver Ljungberg\Desktop\EPFL\MA3\Semester_Project\Code\data_functions\la_track.yaml'
+            base_dir = os.path.dirname(os.path.realpath(__file__))
+            la_track = os.path.join(base_dir, 'data', 'data_files', 'la_track.yaml')
+            # la_track = r'C:\Users\Oliver Ljungberg\Desktop\EPFL\MA3\Semester_Project\Code\data_functions\la_track.yaml'
             with open(la_track) as file:
                 docs = yaml.safe_load_all(file)
                 for doc in docs:
